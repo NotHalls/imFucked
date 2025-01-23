@@ -1,0 +1,15 @@
+*.dir
+build/
+CMakeFiles/
+x64/
+
+*.vs/
+*.cmake
+*.vcxproj
+*.filters
+*.sln
+*.user
+
+*.my.todo
+
+CMakeCache*
