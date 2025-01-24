@@ -2,6 +2,7 @@
 build/
 CMakeFiles/
 x64/
+bin/
 
 *.vs/
 *.cmake

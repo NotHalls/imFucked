@@ -11,16 +11,19 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY
     "${CMAKE_SOURCE_DIR}/bin/objs/${CMAKE_SYSTEM_NAME}/${CMAKE_BUILD_TYPE}")
 
-find_package(Vulkan REQUIRED)
-
 # setting up files
 file(GLOB_RECURSE CLIENT_SOURCES "src/*.cpp")
 file(GLOB_RECURSE STB_SOURCES
     "../submodules/stb/*.cpp" "../submodules/stb/*.c")
 
 
+# setting up the pch
+set(PCH_HEADER "src/IMF_PCH.h")
+set(PCH_SOURCE "src/IMF_PCH.cpp")
+
+
 # making the exec
-add_executable(${PROJECT_NAME} ${CLIENT_SOURCES} ${STB_SOURCES})
+add_executable(${PROJECT_NAME} ${CLIENT_SOURCES} ${STB_SOURCES} ${PCH_SOURCE})
 
 
 # adding submodules
@@ -40,18 +43,25 @@ add_library(imgui STATIC
     ../submodules/imgui/imgui_demo.cpp
 
     ../submodules/imgui/backends/imgui_impl_sdl3.cpp
-    ../submodules/imgui/backends/imgui_impl_vulkan.cpp
+    ../submodules/imgui/backends/imgui_impl_opengl3.cpp
 )
 target_include_directories(imgui PUBLIC
     ../submodules/imgui
     ../submodules/sdl/include
-    ${Vulkan_INCLUDE_DIR}
+    ../submodules/glad/include
+)
+
+add_library(glad STATIC
+    ../submodules/glad/src/glad.c
+)
+target_include_directories(glad PUBLIC
+    ../submodules/glad/include
 )
 
 
 # linking libs
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    ${Vulkan_LIBRARIES}
+    glad
     SDL3::SDL3
     imgui
 
@@ -70,7 +80,7 @@ target_compile_definitions(${PROJECT_NAME}
 
 # includes
 target_include_directories(${PROJECT_NAME} PUBLIC
-    ${Vulkan_INCLUDE_DIR}
+    ../submodules/glad/include
     ../submodules/sdl/include
     ../submodules/glm/glm
     ../submodules/imgui

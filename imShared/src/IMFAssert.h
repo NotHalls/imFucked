@@ -4,6 +4,7 @@
 {\
     if(x)\
     {\
+        std::cerr << "ASSERTION CALLED: " + std::string(msg);\
         throw std::runtime_error("ASSERTION CALLED: " + std::string(msg));\
     }\
 }
