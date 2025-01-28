@@ -80,6 +80,29 @@ void StartEditorGUI()
     }
 }
 
+void UpdateEditorGUI()
+{
+    if(GetEditorGUI().FirstTime)
+    {
+        // @TODO: can we add something other that that variable
+        // to get the X (exit) button?
+        ImGui::Begin("First Time Here?", &GetEditorGUI().FirstTime);
+        ImGui::Text("This is some useful text.");
+        if(ImGui::Button("OK!"))
+        { GetEditorGUI().FirstTime = false; }
+        ImGui::End();
+    }
+
+    if(GetEditorGUI().EditorWindows.at("Demo"))
+    {
+        ImGui::Begin("Demo", &GetEditorGUI().EditorWindows.at("Demo"));
+        ImGui::Text("Hello, world!");
+        if(ImGui::Button("Close"))
+        { GetEditorGUI().EditorWindows.at("Demo") = false; }
+        ImGui::End();
+    }
+}
+
 void StopEditorGUI()
 {
     ImGui::Render();

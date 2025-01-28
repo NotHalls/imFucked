@@ -8,6 +8,8 @@ union SDL_Event;
 struct EditorGUI
 {
     bool IsOpen = false;
+    // @TODO: this is to learn saving
+    bool FirstTime = true;
 
     std::unordered_map<std::string, bool> EditorWindows;
 };
@@ -22,6 +24,7 @@ void InitEditorGUI();
 void CloseEditorGUI();
 
 void StartEditorGUI();
+void UpdateEditorGUI();
 void StopEditorGUI();
 
 void ProcessImGuiEvents(const SDL_Event* sdlEvent);

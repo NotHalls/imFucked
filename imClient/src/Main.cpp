@@ -8,6 +8,9 @@
 #include "EditorGUI.h"
 #include "GlobalValues.h"
 #include "GLCommands.h"
+#include "Game/GameContext.h"
+
+#include "Game/Game.h"
 
 
 int main()
@@ -33,9 +36,17 @@ int main()
     GetEditorGUI().EditorWindows.emplace("Demo", true);
     bool startWindowOpen = true;
 
-    // gameloop //
-    SDL_Event event;
+    GetGameContext().Layers.push_back(new GameScene());
 
+    // delta time
+    uint32_t lastTime = SDL_GetTicks();
+    float deltaTime = 0.0f;
+
+    // start setup
+    SDL_Event event;
+    for(auto& layer : GetGameContext().Layers)
+    { layer->OnStart(); }
+    // gameloop //
     while(GetGame().IsRunning)
     {
         while(SDL_PollEvent(&event))
@@ -43,28 +54,25 @@ int main()
             if(event.type == SDL_EVENT_QUIT)
             { GetGame().IsRunning = false; }
 
+            for(auto& layer : GetGameContext().Layers)
+            { layer->OnEvent(&event); }
+
             ProcessImGuiEvents(&event);
         }
+
+        // delta time
+        uint32_t currentTime = SDL_GetTicks();
+        deltaTime = (currentTime - lastTime) / 1000.0f;
+        lastTime = currentTime;
+
+        // game context update
+        for(auto& layer : GetGameContext().Layers)
+        { layer->OnUpdate(deltaTime); }
 
         // imgui stuff //
         StartEditorGUI();
 
-        if(startWindowOpen)
-        {
-            ImGui::Begin("Hello, world!", &startWindowOpen);
-            ImGui::Text("This is some useful text.");
-            ImGui::Button("This Is A Button");
-            ImGui::End();
-        }
-
-        if(GetEditorGUI().EditorWindows.at("Demo"))
-        {
-            ImGui::Begin("Demo", &GetEditorGUI().EditorWindows.at("Demo"));
-            ImGui::Text("Hello, world!");
-            if(ImGui::Button("Close"))
-            { GetEditorGUI().EditorWindows.at("Demo") = false; }
-            ImGui::End();
-        }
+        UpdateEditorGUI();
 
         ClearScreen(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
 
