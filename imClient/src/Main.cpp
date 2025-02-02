@@ -16,6 +16,7 @@
 int main()
 {
     // setup //
+    Setup();
     SDL_Window* mainWindow = static_cast<SDL_Window*>(CreateWindow());
     SDL_GLContext mainContext =
         static_cast<SDL_GLContext>(CreateContext(mainWindow));
@@ -34,7 +35,6 @@ int main()
 
     // @TEMP //
     GetEditorGUI().EditorWindows.emplace("Demo", true);
-    bool startWindowOpen = true;
 
     GetGameContext().Layers.push_back(new GameScene());
 
@@ -65,16 +65,15 @@ int main()
         deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;
 
+        ClearScreen(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
+        
+        // imgui stuff //
+        StartEditorGUI();
+        UpdateEditorGUI();
+
         // game context update
         for(auto& layer : GetGameContext().Layers)
         { layer->OnUpdate(deltaTime); }
-
-        // imgui stuff //
-        StartEditorGUI();
-
-        UpdateEditorGUI();
-
-        ClearScreen(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
 
         StopEditorGUI();
 
