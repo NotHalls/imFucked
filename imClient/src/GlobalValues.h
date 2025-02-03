@@ -2,17 +2,16 @@
 
 #include "IMF_PCH.h"
 
-
 struct Game
 {
-    int Width = 1280;
-    int Height = 720;
+  int Width = 1280;
+  int Height = 720;
 
-    bool IsRunning = true;
+  bool IsRunning = true;
 };
 
-inline Game& GetGame()
+inline Game &GetGame()
 {
-    static Game game;
-    return game;
+  static Game game;
+  return game;
 }

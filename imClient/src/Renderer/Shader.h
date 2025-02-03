@@ -5,46 +5,37 @@
 #include "ext/vector_float3.hpp"
 #include "ext/vector_int3.hpp"
 
-
 class Shader
 {
 private:
-    uint32_t m_shaderProgram;
-    std::vector<std::string> m_filePaths;
+  uint32_t m_shaderProgram;
+  std::vector<std::string> m_filePaths;
 
+private:
+  std::string readFile(const std::string &filePath);
+  void processShader(const std::vector<std::string> &shaderFiles);
 
-private:    
-    std::string readFile(const std::string& filePath);
-    void processShader(const std::vector<std::string>& shaderFiles);
-
-    std::string getShaderTypeFromExtension(const std::string& filePath);
-    int getUniformLocation(const std::string& name);
+  std::string getShaderTypeFromExtension(const std::string &filePath);
+  int getUniformLocation(const std::string &name);
 
 public:
-    Shader() {}
-    Shader(const std::vector<std::string>& shaderFiles);  
-    ~Shader();
-    
-    void Bind();
-    void Unbind();
+  Shader() {}
+  Shader(const std::vector<std::string> &shaderFiles);
+  ~Shader();
 
-    const std::vector<std::string>& GetFilePaths() const
-    { return m_filePaths; };
+  void Bind();
+  void Unbind();
 
-    void SetUniformFloat(const std::string& uniformName, float value);
-    void SetUniformInt(const std::string& uniformName, int value);
+  const std::vector<std::string> &GetFilePaths() const { return m_filePaths; };
 
-    void SetUniformVec3(
-        const std::string& uniformName, const glm::vec3& value
-    );
-    void SetUniformIVec3(
-        const std::string& uniformName, const glm::ivec3& value
-    );
+  void SetUniformFloat(const std::string &uniformName, float value);
+  void SetUniformInt(const std::string &uniformName, int value);
 
-    void SetUniformMat4(
-        const std::string& uniformName, const glm::mat4& value
-    );
-    
-    static std::shared_ptr<Shader>
-    CreateShader(const std::vector<std::string>& shaderFiles);
+  void SetUniformVec3(const std::string &uniformName, const glm::vec3 &value);
+  void SetUniformIVec3(const std::string &uniformName, const glm::ivec3 &value);
+
+  void SetUniformMat4(const std::string &uniformName, const glm::mat4 &value);
+
+  static std::shared_ptr<Shader> CreateShader(
+      const std::vector<std::string> &shaderFiles);
 };

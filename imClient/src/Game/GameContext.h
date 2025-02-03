@@ -2,27 +2,26 @@
 
 #include "IMF_PCH.h"
 
-
 union SDL_Event;
 
 struct GameLayer
 {
 public:
-    GameLayer() = default;
+  GameLayer() = default;
 
-    virtual void OnEvent(const SDL_Event* event) {}
+  virtual void OnEvent(const SDL_Event *event) {}
 
-    virtual void OnStart() {}
-    virtual void OnUpdate(float deltaTime) {}
+  virtual void OnStart() {}
+  virtual void OnUpdate(float deltaTime) {}
 };
 
 struct GameContext
 {
-    std::vector<GameLayer*> Layers;
+  std::vector<GameLayer *> Layers;
 };
 
-inline GameContext& GetGameContext()
+inline GameContext &GetGameContext()
 {
-    static GameContext gameContext;
-    return gameContext;
+  static GameContext gameContext;
+  return gameContext;
 }

@@ -2,18 +2,17 @@
 
 #include "BufferLayout.h"
 
-
-BufferLayout::BufferLayout(
-    const std::initializer_list<BufferAttrib>& layout
-)
+BufferLayout::BufferLayout(const std::initializer_list<BufferAttrib> &layout)
     : m_bufferAttribs(layout)
-{ CalculateAttributes(); }
+{
+  CalculateAttributes();
+}
 
 void BufferLayout::CalculateAttributes()
 {
-    for(auto& attrib : m_bufferAttribs)
-    {
-        attrib.Offset = m_stride;
-        m_stride += attrib.Size;
-    }
+  for(auto &attrib : m_bufferAttribs)
+  {
+    attrib.Offset = m_stride;
+    m_stride += attrib.Size;
+  }
 }

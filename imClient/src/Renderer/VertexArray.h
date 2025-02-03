@@ -5,20 +5,19 @@
 
 #include "Buffer.h"
 
-
 class VertexArray
 {
 private:
-    uint32_t m_VAO;
+  uint32_t m_VAO;
 
 public:
-    VertexArray();
-    ~VertexArray();
+  VertexArray();
+  ~VertexArray();
 
-    void Bind();
-    void Unbind();
+  void Bind();
+  void Unbind();
 
-    void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& buffer);
+  void AddVertexBuffer(const std::shared_ptr<VertexBuffer> &buffer);
 
-    static std::unique_ptr<VertexArray> Create();
+  static std::unique_ptr<VertexArray> Create();
 };

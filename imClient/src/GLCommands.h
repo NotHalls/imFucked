@@ -2,8 +2,7 @@
 
 #include <vec4.hpp>
 
+const char *GetGLVersion();
 
-const char* GetGLVersion();
-
-void ClearScreen(const glm::vec4& color);
+void ClearScreen(const glm::vec4 &color);
 void SwapBuffers();

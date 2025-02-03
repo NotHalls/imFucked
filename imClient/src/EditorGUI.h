@@ -2,22 +2,21 @@
 
 #include "IMF_PCH.h"
 
-
 union SDL_Event;
 
 struct EditorGUI
 {
-    bool IsOpen = false;
-    // @TODO: this is to learn saving
-    bool FirstTime = true;
+  bool IsOpen = false;
+  // @TODO: this is to learn saving
+  bool FirstTime = true;
 
-    std::unordered_map<std::string, bool> EditorWindows;
+  std::unordered_map<std::string, bool> EditorWindows;
 };
 
-inline EditorGUI& GetEditorGUI()
+inline EditorGUI &GetEditorGUI()
 {
-    static EditorGUI editorGUI;
-    return editorGUI;
+  static EditorGUI editorGUI;
+  return editorGUI;
 }
 
 void InitEditorGUI();
@@ -27,4 +26,4 @@ void StartEditorGUI();
 void UpdateEditorGUI();
 void StopEditorGUI();
 
-void ProcessImGuiEvents(const SDL_Event* sdlEvent);
+void ProcessImGuiEvents(const SDL_Event *sdlEvent);

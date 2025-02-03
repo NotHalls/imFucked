@@ -1,6 +1,3 @@
 #include <iostream>
 
-int main()
-{
-    std::cout << "imShared" << std::endl;
-}
+int main() { std::cout << "imShared" << std::endl; }

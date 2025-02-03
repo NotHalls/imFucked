@@ -1,15 +1,14 @@
 #pragma once
 
-#include <iostream>
-#include <cstdint>
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <memory>
 #include <cstddef>
+#include <cstdint>
 #include <fstream>
+#include <iostream>
+#include <memory>
 #include <sstream>
 #include <stdexcept>
-
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 #include "IMFAssert.h"
