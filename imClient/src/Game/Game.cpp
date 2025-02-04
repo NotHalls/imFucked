@@ -14,12 +14,12 @@ GameScene::GameScene()
   m_VB = VertexBuffer::Create(vertices.data(), vertices.size() * sizeof(float));
 }
 
-void GameScene::OnEvent(const SDL_Event *event)
+void GameScene::OnEvent(const SDL_Event &event)
 {
-  switch(event->type)
+  switch(event.type)
   {
   case SDL_EVENT_KEY_DOWN:
-    switch(event->key.scancode)
+    switch(event.key.scancode)
     {
     case SDL_SCANCODE_W:
       std::cout << "HEHEH" << std::endl;

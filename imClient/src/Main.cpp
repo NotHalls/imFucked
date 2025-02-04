@@ -11,6 +11,7 @@
 #include "Setup.h"
 
 #include "Game/Game.h"
+#include "Game/ImGuiLayer.h"
 
 int main()
 {
@@ -27,13 +28,11 @@ int main()
   std::cout << "OpenGL Version: " << GetGLVersion() << std::endl;
   SDL_GL_SetSwapInterval(1); // vsync on
 
-  // imgui init //
-  InitEditorGUI();
-
-  // @TEMP //
-  GetEditorGUI().EditorWindows.emplace("Demo", true);
+  // imgui
+  ImGuiLayer *m_imguiLayer = new ImGuiLayer();
 
   GetGameContext().Layers.push_back(new GameScene());
+  GetGameContext().Layers.emplace_back(m_imguiLayer);
 
   // delta time
   uint32_t lastTime = SDL_GetTicks();
@@ -55,12 +54,11 @@ int main()
         GetGame().IsRunning = false;
       }
 
-      for(auto &layer : GetGameContext().Layers)
+      for(auto itr = GetGameContext().Layers.end();
+          itr != GetGameContext().Layers.begin();)
       {
-        layer->OnEvent(&event);
+        (*--itr)->OnEvent(event);
       }
-
-      ProcessImGuiEvents(&event);
     }
 
     // delta time
@@ -70,23 +68,21 @@ int main()
 
     ClearScreen(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
 
-    // imgui stuff //
-    StartEditorGUI();
-    UpdateEditorGUI();
-
     // game context update
+    m_imguiLayer->Begin();
     for(auto &layer : GetGameContext().Layers)
     {
       layer->OnUpdate(deltaTime);
     }
-
-    StopEditorGUI();
+    m_imguiLayer->End();
 
     SwapBuffers();
   }
 
   // close //
-  CloseEditorGUI();
+  // we don't need this delete here because we will be closing the appp anyway
+  // but i would like to have it
+  delete(m_imguiLayer);
   DestroySDL(mainWindow, mainContext);
 
   return 0;

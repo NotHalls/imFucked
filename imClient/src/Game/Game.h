@@ -31,7 +31,7 @@ private:
 
 public:
   GameScene();
-  void OnEvent(const SDL_Event *event) override;
+  void OnEvent(const SDL_Event &event) override;
   void OnStart() override;
   void OnUpdate(float dt) override;
 };
