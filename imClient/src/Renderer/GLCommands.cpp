@@ -3,7 +3,7 @@
 #include <SDL3/SDL.h>
 #include <glad/glad.h>
 
-#include "GLCommands.h"
+#include "Renderer/GLCommands.h"
 
 const char *GetGLVersion()
 {

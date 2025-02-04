@@ -3,15 +3,14 @@
 #include <SDL3/SDL.h>
 #include <imgui.h>
 
-#include "EditorGUI.h"
-#include "GLCommands.h"
-#include "Game/GameContext.h"
+#include "GameEngine/GameContext.h"
 #include "GlobalValues.h"
 #include "IMFAssert.h"
+#include "Renderer/GLCommands.h"
 #include "Setup.h"
 
-#include "Game/Game.h"
-#include "Game/ImGuiLayer.h"
+#include "GameEngine/Game.h"
+#include "GameEngine/ImGuiLayer.h"
 
 int main()
 {
