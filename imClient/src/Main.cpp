@@ -7,6 +7,7 @@
 #include "GlobalValues.h"
 #include "IMFAssert.h"
 #include "Renderer/GLCommands.h"
+#include "Renderer/Renderer.h"
 #include "Setup.h"
 
 #include "GameEngine/Game.h"
@@ -26,6 +27,10 @@ int main()
   // settigns and others //
   std::cout << "OpenGL Version: " << GetGLVersion() << std::endl;
   SDL_GL_SetSwapInterval(1); // vsync on
+
+  // Initializing the renderer
+  Renderer::Init({"imClient/assets/shaders/2DShader.vertex.glsl",
+                  "imClient/assets/shaders/2DShader.fragment.glsl"});
 
   // imgui
   ImGuiLayer *m_imguiLayer = new ImGuiLayer();

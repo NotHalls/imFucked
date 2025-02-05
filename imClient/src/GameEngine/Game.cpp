@@ -1,6 +1,7 @@
 #include "IMF_PCH.h"
 
 #include "Game.h"
+#include "Renderer/Renderer.h"
 
 // @TEMP
 #include <SDL3/SDL_events.h>
