@@ -9,25 +9,42 @@
 class GameScene : public GameLayer
 {
 private:
-  std::vector<float> vertices = {// positions            // colors
-                                 -0.5f, -0.5f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
-                                 0.5f,  -0.5f, 0.0f, 1.0f, 0.5f, 1.0f, 1.0f,
-                                 0.5f,  0.5f,  0.0f, 1.0f, 1.0f, 0.5f, 1.0f,
-                                 -0.5f, 0.5f,  0.0f, 0.5f, 1.0f, 1.0f, 1.0f};
-  std::vector<uint32_t> indices = {0, 1, 2, 2, 3, 0};
+  std::vector<float> m_Vertices = {
+      // Positions           // Colors (RGBA)
+      // Front face
+      -0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, // Bottom-left (red)
+      0.5f, -0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f,  // Bottom-right (green)
+      0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f,   // Top-right (blue)
+      -0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 0.0f, 1.0f,  // Top-left (yellow)
 
-  std::shared_ptr<VertexBuffer> m_VB;
-  std::shared_ptr<IndexBuffer> m_IB;
-  std::shared_ptr<VertexArray> m_VA;
+      // Back face
+      -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 1.0f, 1.0f, // Bottom-left (magenta)
+      0.5f, -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,  // Bottom-right (cyan)
+      0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 1.0f,   // Top-right (gray)
+      -0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.0f, 1.0f   // Top-left (orange)
+  };
+
+  std::vector<uint32_t> m_Indices = {// Front face
+                                     0, 1, 2, 2, 3, 0,
+                                     // Back face
+                                     4, 5, 6, 6, 7, 4,
+                                     // Left face
+                                     4, 0, 3, 3, 7, 4,
+                                     // Right face
+                                     1, 5, 6, 6, 2, 1,
+                                     // Top face
+                                     3, 2, 6, 6, 7, 3,
+                                     // Bottom face
+                                     4, 5, 1, 1, 0, 4};
+
+  Ref<VertexBuffer> m_VB;
+  Ref<IndexBuffer> m_IB;
+  Ref<VertexArray> m_VA;
+  Ref<Shader> m_Shader;
 
   uint32_t m_VBID;
   uint32_t m_IBID;
   uint32_t m_VAID;
-
-  std::vector<std::string> m_shaderSources = {
-      "imClient/assets/shaders/2DShader.vertex.glsl",
-      "imClient/assets/shaders/2DShader.fragment.glsl"};
-  std::shared_ptr<Shader> m_shader;
 
 public:
   GameScene();

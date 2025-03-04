@@ -12,3 +12,4 @@
 #include <vector>
 
 #include "IMFAssert.h"
+#include "Memory/Pointer.h"

@@ -20,8 +20,7 @@ public:
   void SetBufferLayout(const BufferLayout &layout) { m_bufferLayout = layout; }
   const BufferLayout &GetBufferLayout() const { return m_bufferLayout; }
 
-  static std::shared_ptr<VertexBuffer> Create(const float *buffer,
-                                              uint32_t size);
+  static Ref<VertexBuffer> Create(const float *buffer, uint32_t size);
 };
 
 class IndexBuffer
@@ -37,5 +36,5 @@ public:
   void Bind();
   void Unbind();
 
-  static std::shared_ptr<IndexBuffer> Create(uint32_t *buffer, uint32_t count);
+  static Ref<IndexBuffer> Create(uint32_t *buffer, uint32_t count);
 };

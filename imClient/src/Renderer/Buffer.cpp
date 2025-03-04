@@ -6,8 +6,7 @@
 #include "BufferLayout.h"
 
 // VERTEX BUFFER //
-std::shared_ptr<VertexBuffer> VertexBuffer::Create(const float *buffer,
-                                                   uint32_t size)
+Ref<VertexBuffer> VertexBuffer::Create(const float *buffer, uint32_t size)
 {
   return std::make_shared<VertexBuffer>(buffer, size);
 }
@@ -24,8 +23,7 @@ void VertexBuffer::Bind() { glBindBuffer(GL_ARRAY_BUFFER, m_VBO); }
 void VertexBuffer::Unbind() { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
 // INDEX BUFFER //
-std::shared_ptr<IndexBuffer> IndexBuffer::Create(uint32_t *buffer,
-                                                 uint32_t count)
+Ref<IndexBuffer> IndexBuffer::Create(uint32_t *buffer, uint32_t count)
 {
   return std::make_shared<IndexBuffer>(buffer, count);
 }

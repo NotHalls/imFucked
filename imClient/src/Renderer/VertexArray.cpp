@@ -21,7 +21,7 @@ VertexArray::~VertexArray() { glDeleteVertexArrays(1, &m_VAO); }
 void VertexArray::Bind() { glBindVertexArray(m_VAO); }
 void VertexArray::Unbind() { glBindVertexArray(0); }
 
-void VertexArray::AddVertexBuffer(const std::shared_ptr<VertexBuffer> &buffer)
+void VertexArray::AddVertexBuffer(const Ref<VertexBuffer> &buffer)
 {
   IMF_ASSERT(!(buffer->GetBufferLayout().GetBufferAttribs().size()),
              "You Dont have Any BuffersLayouts Setup In The VertexBuffer")

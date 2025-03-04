@@ -36,6 +36,5 @@ public:
 
   void SetUniformMat4(const std::string &uniformName, const glm::mat4 &value);
 
-  static std::shared_ptr<Shader> CreateShader(
-      const std::vector<std::string> &shaderFiles);
+  static Ref<Shader> CreateShader(const std::vector<std::string> &shaderFiles);
 };

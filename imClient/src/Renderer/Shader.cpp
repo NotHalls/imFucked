@@ -7,8 +7,7 @@
 
 #include "Shader.h"
 
-std::shared_ptr<Shader> Shader::CreateShader(
-    const std::vector<std::string> &shaderFiles)
+Ref<Shader> Shader::CreateShader(const std::vector<std::string> &shaderFiles)
 {
   return std::make_shared<Shader>(shaderFiles);
 }

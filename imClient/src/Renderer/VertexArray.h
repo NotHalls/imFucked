@@ -17,7 +17,7 @@ public:
   void Bind();
   void Unbind();
 
-  void AddVertexBuffer(const std::shared_ptr<VertexBuffer> &buffer);
+  void AddVertexBuffer(const Ref<VertexBuffer> &buffer);
 
   static std::unique_ptr<VertexArray> Create();
 };

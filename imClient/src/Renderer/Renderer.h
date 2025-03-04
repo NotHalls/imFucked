@@ -8,9 +8,9 @@ class Renderer
 private:
   struct SceneData
   {
-    std::shared_ptr<Shader> Shader;
+    Ref<Shader> Shader;
   };
-  static SceneData *m_sceneData;
+  static SceneData *m_SceneData;
 
 public:
   static void Init(const std::vector<std::string> &filePaths);
