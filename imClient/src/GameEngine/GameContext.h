@@ -18,6 +18,7 @@ public:
   }
 
   virtual void OnEvent(const SDL_Event &event) {}
+  virtual void OnResize() {}
 
   virtual void OnStart() {}
   virtual void OnUpdate(float deltaTime) {}

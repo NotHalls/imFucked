@@ -29,8 +29,7 @@ int main()
   SDL_GL_SetSwapInterval(1); // vsync on
 
   // Initializing the renderer
-  Renderer::Init({"imClient/assets/shaders/2DShader.vertex.glsl",
-                  "imClient/assets/shaders/2DShader.fragment.glsl"});
+  // Renderer::Init();
 
   // imgui
   ImGuiLayer *m_imguiLayer = new ImGuiLayer();
@@ -44,7 +43,7 @@ int main()
 
   // start setup
   SDL_Event event;
-  for(auto &layer : GetGameContext().Layers)
+  for(auto layer : GetGameContext().Layers)
   {
     layer->OnStart();
   }
@@ -56,6 +55,16 @@ int main()
       if(event.type == SDL_EVENT_QUIT)
       {
         GetGame().IsRunning = false;
+      }
+      else if(event.type == SDL_EVENT_WINDOW_RESIZED)
+      {
+        GetGame().Width = event.window.data1;
+        GetGame().Height = event.window.data2;
+        ResetViewportSize();
+        for(GameLayer *layer : GetGameContext().Layers)
+        {
+          layer->OnResize();
+        }
       }
 
       for(auto itr = GetGameContext().Layers.end();

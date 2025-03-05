@@ -39,13 +39,13 @@ void ImGuiLayer::OnUpdate(float dt)
   {
     // @TODO: can we add something other that that variable
     // to get the X (exit) button?
-    ImGui::Begin("First Time Here?", &m_firstTime);
-    ImGui::Text("This is some useful text.");
-    if(ImGui::Button("OK!"))
-    {
-      m_firstTime = false;
-    }
-    ImGui::End();
+    // ImGui::Begin("First Time Here?", &m_firstTime);
+    // ImGui::Text("This is some useful text.");
+    // if(ImGui::Button("OK!"))
+    // {
+    //   m_firstTime = false;
+    // }
+    // ImGui::End();
   }
 }
 

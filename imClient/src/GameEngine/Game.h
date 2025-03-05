@@ -2,6 +2,7 @@
 #include "IMF_PCH.h"
 
 #include "GameContext.h"
+#include "GameEngine/Camera.h"
 #include "Renderer/Buffer.h"
 #include "Renderer/Shader.h"
 #include "Renderer/VertexArray.h"
@@ -23,7 +24,6 @@ private:
       0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 1.0f,   // Top-right (gray)
       -0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.0f, 1.0f   // Top-left (orange)
   };
-
   std::vector<uint32_t> m_Indices = {// Front face
                                      0, 1, 2, 2, 3, 0,
                                      // Back face
@@ -46,9 +46,16 @@ private:
   uint32_t m_IBID;
   uint32_t m_VAID;
 
+  glm::vec3 m_Position = {0.0f, 0.0f, 0.0f};
+  glm::vec3 m_Rotation = {0.0f, 0.0f, 0.0f};
+  glm::vec3 m_Scale = {1.0f, 1.0f, 1.0f};
+
+  Camera m_Camera;
+
 public:
   GameScene();
   void OnEvent(const SDL_Event &event) override;
+  void OnResize() override;
   void OnStart() override;
   void OnUpdate(float dt) override;
 };

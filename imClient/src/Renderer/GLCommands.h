@@ -6,3 +6,4 @@ const char *GetGLVersion();
 
 void ClearScreen(const glm::vec4 &color);
 void SwapBuffers();
+void ResetViewportSize();
