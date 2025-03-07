@@ -5,6 +5,7 @@ x64/
 bin/
 
 *.vs/
+*.idea
 *.cmake
 *.vcxproj
 *.filters

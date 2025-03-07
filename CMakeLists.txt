@@ -11,6 +11,7 @@ endif()
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release;Export"
     CACHE STRING "Available Build Configurations")
 
+set(${CMAKE_VS_DEBUGGER_WORKING_DIRECTORY} ${CMAKE_SOURCE_DIR})
 
 project(imFucked)
 

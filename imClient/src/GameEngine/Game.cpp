@@ -8,6 +8,7 @@
 #include "gtc/type_ptr.hpp"
 
 // @TEMP
+#include "Debug.h"
 #include <SDL3/SDL_events.h>
 #include <glad/glad.h>
 
@@ -17,6 +18,7 @@ GameScene::GameScene()
   m_Shader =
       Shader::CreateShader({"imClient/assets/shaders/2DShader.vertex.glsl",
                             "imClient/assets/shaders/2DShader.fragment.glsl"});
+  m_BoxTexture = Texture::Create("imClient/assets/textures/Box.png");
   m_VA = VertexArray::Create();
   m_IB = IndexBuffer::Create(m_Indices.data(), m_Indices.size());
   m_VB = VertexBuffer::Create(m_Vertices.data(),
@@ -48,7 +50,8 @@ void GameScene::OnUpdate(float dt)
   m_VB->Bind();
   m_VA->Bind();
   m_IB->Bind();
-  m_VB->SetBufferLayout({{AttribType::Vec3}, {AttribType::Vec4}});
+  m_VB->SetBufferLayout(
+      {{AttribType::Vec3}, {AttribType::Vec4}, {AttribType::Vec2}});
   m_VA->AddVertexBuffer(m_VB);
 
   glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(m_Rotation.x),
@@ -61,6 +64,8 @@ void GameScene::OnUpdate(float dt)
                         glm::scale(glm::mat4(1.0f), m_Scale);
   glm::mat4 pvm = m_Camera.GetCameraMatrices().ViewProjectionMatrix * transform;
 
+  m_BoxTexture->Bind();
+  m_Shader->SetUniformInt("u_Texture", 0);
   m_Shader->SetUniformMat4("u_PVM", pvm);
 
   glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_INT, nullptr);

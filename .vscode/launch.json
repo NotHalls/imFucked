@@ -5,20 +5,17 @@
             "request": "launch",
             "type": "cppvsdbg",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}/bin/Windows/Debug/imClient.exe",
+            "program": "${workspaceFolder}/bin/Windows-Debug/imClient.exe",
             "console": "newExternalWindow",
-
             "preLaunchTask": "Build"
         },
-
         {
             "name": "Launch Server",
             "request": "launch",
             "type": "cppvsdbg",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}/bin/Windows/Debug/imServer.exe",
+            "program": "${workspaceFolder}/bin/Windows-Debug/imServer.exe",
             "console": "newExternalWindow",
-
             "preLaunchTask": "Build"
         }
     ]
